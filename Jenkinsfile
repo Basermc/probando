@@ -18,7 +18,7 @@ pipeline {
                     proyect = "sgt-onehr"
                 }
               }
-                withCredentials([string(credentialsId: project_name + '_secret_token_' + params.ENVIRONMENT, variable: 'SECRET_TOKEN')]) {
+                withCredentials([string(credentialsId: proyect + '_secret_token_' + params.ENVIRONMENT, variable: 'SECRET_TOKEN')]) {
                     echo "The SECRET_TOKEN for the project ${project_name} and environment ${params.ENVIRONMENT} is: ${SECRET_TOKEN}"
                 }
             }
