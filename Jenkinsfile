@@ -26,16 +26,4 @@ pipeline {
     }
 }
 
-def load_secret_token(environment) {
-    switch (environment) {
-        case 'dev':
-            return 'jenkins_secret_token_dev'
-        case 'sta':
-            return 'jenkins_secret_token_sta'
-        case 'pre':
-            return 'jenkins_secret_token_pre'
-        default:
-            return 'undefined_secret_token'
-    }
-}
 
