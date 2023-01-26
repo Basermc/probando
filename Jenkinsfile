@@ -15,3 +15,16 @@ pipeline {
         }
     }
 }
+
+def load_secret_token(environment) {
+    switch (environment) {
+        case 'dev':
+            return 'dev_secret_token'
+        case 'sta':
+            return 'sta_secret_token'
+        case 'pre':
+            return 'pre_secret_token'
+        default:
+            return 'undefined_secret_token'
+    }
+}
