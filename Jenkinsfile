@@ -18,7 +18,7 @@ pipeline {
 
 def load_secret_token(environment) {
     switch (environment) {
-        case 'dev':
+        case 'project1':
             return 'dev_secret_token'
         case 'sta':
             return 'sta_secret_token'
