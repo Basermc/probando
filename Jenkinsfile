@@ -1,4 +1,4 @@
-def secret_token = load_secret_token(params.ENVIRONMENT)
+
 def proyect
 
 properties([parameters([
