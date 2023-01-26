@@ -4,17 +4,17 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    env.ENVIRONMENT = input message: 'Select the environment', parameters: [choice(name: 'ENVIRONMENT', choices: ['project1', 'sta', 'pre'], description: 'Select the environment')]
-                    
-                    // load the secret token for the environment
-                    env.SECRET_TOKEN = load_secret_token(env.ENVIRONMENT)
+                    env.ENVIRONMENT = input message: 'Select the environment', parameters: [choice(name: 'ENVIRONMENT', choices: ['dev', 'sta', 'pre'], description: 'Select the environment')]
                 }
-                echo "The SECRET_TOKEN for the environment ${env.ENVIRONMENT} is: ${env.SECRET_TOKEN}"
-                sh "echo $SECRET_TOKEN"
+                withCredentials([string(credentialsId: 'jenkins_secret_token_' + env.ENVIRONMENT, variable: 'SECRET_TOKEN')]) {
+                    echo "The SECRET_TOKEN for the environment ${env.ENVIRONMENT} is: ${env.SECRET_TOKEN}"
+                    sh "echo $SECRET_TOKEN"
+                }
             }
         }
     }
 }
+
 
 def load_secret_token(environment) {
     switch (environment) {
