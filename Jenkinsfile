@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    env.ENVIRONMENT = input message: 'Select the environment', parameters: [choice(name: 'ENVIRONMENT', choices: ['dev', 'sta', 'pre'], description: 'Select the environment')]
+                    env.ENVIRONMENT = input message: 'Select the environment', parameters: [choice(name: 'ENVIRONMENT', choices: ['project1', 'sta', 'pre'], description: 'Select the environment')]
                     
                     // load the secret token for the environment
                     env.SECRET_TOKEN = load_secret_token(env.ENVIRONMENT)
