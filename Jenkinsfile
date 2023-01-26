@@ -1,3 +1,5 @@
+def secret_token = load_secret_token(params.ENVIRONMENT)
+
 properties([parameters([
   choice(name: 'ENVIRONMENT', choices: ['dev', 'sta', 'pre'], description: 'Select the environment')
 ])])
@@ -7,10 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withCredentials([string(credentialsId: 'jenkins_secret_token_' + env.ENVIRONMENT, variable: 'SECRET_TOKEN')]) {
-                    echo "The SECRET_TOKEN for the environment ${params.ENVIRONMENT} is: ${env.SECRET_TOKEN}"
-                    sh "echo $SECRET_TOKEN"
-                }
+                echo "The SECRET_TOKEN for the environment ${params.ENVIRONMENT} is: ${secret_token}"
+                sh "echo $secret_token"
             }
         }
     }
@@ -28,3 +28,4 @@ def load_secret_token(environment) {
             return 'undefined_secret_token'
     }
 }
+
